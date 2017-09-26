@@ -1,6 +1,25 @@
 <?php 
   
   // Car
+  // Интерфейс
+  interface drivable
+  {
+      public function letsDrive($speed);
+  }
+
+  class Tank implements drivable
+  {
+      public function letsDrive($speed)
+      {
+        // TODO: Implement letsDrive() method.
+        echo "Мы едем, едем, едем в далёкие края! Со скоростью {$this->speed} <br>";
+      }
+  }
+
+  $bigTank = new Tank();
+  $bigTank->letsDrive(4);
+
+  // Абстрактный класс
   abstract class GroundTransport 
   {
     public $numberOfWheels;
@@ -21,7 +40,7 @@
 
     public function makeWheels()
     {
-        if ($numberOfWheels === 4) {
+        if ($this->numberOfWheels === 4) {
             echo "Я машина. У меня вот столько колёс: {$this->numberOfWheels}. ";
         } else {
             echo "Я странная машина. У меня вот столько колёс: {$this->numberOfWheels}. ";
@@ -93,7 +112,7 @@
   {
     public $wingspan;
 
-    abstract public function fly($wingspan);
+    abstract public function fly();
   }
 
   class Duck extends Birds
@@ -105,10 +124,10 @@
       $this->wingspan = $wingspan;
     }
 
-    public function fly($wingspan)
+    public function fly()
       {
         // TODO: Implement fly() method.
-        if ($wingspan < 0.05) {
+        if ($this->wingspan < 0.15) {
             echo "<br> Вы чё?! Я не умею летать! У меня размах крыльев всего {$this->wingspan} м";
         } else {
             echo "<br> Полетели!";
@@ -117,7 +136,7 @@
   }
 
   $yellowDuck = new Duck(rand(1,100)/100);
-  $yellowDuck->fly(wingspan);
+  $yellowDuck->fly();
 
   // Product
   abstract class Goods
@@ -147,7 +166,7 @@
     }
   }
 
-  $toy = new Product("Медевжонок", 1200);
+  $toy = new Product("Медвежонок", 1200);
   echo "<hr>" . "Товар: " . $toy->name . "<br>" . "Цена: " . $toy->getPrice(0.17);
 
  ?>
